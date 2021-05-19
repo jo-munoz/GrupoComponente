@@ -33,7 +33,7 @@
 
         [Display(Name = "Fecha Nacimiento")]
         [Required(ErrorMessage = "El campo {0} es requerido")]
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
 
         [Display(Name = "Sexo")]
         [Required(ErrorMessage = "El campo {0} es requerido")]

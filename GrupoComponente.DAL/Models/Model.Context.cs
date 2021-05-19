@@ -12,6 +12,8 @@ namespace GrupoComponente.DAL.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class anubisEntities : DbContext
     {
@@ -26,5 +28,30 @@ namespace GrupoComponente.DAL.Models
         }
     
         public virtual DbSet<tbUsers> tbUsers { get; set; }
+    
+        public virtual int spUsuariosCRUD(Nullable<int> cid, string cName, Nullable<System.DateTime> cDate, string cSex, Nullable<int> cVal, ObjectParameter cMensaje)
+        {
+            var cidParameter = cid.HasValue ?
+                new ObjectParameter("cid", cid) :
+                new ObjectParameter("cid", typeof(int));
+    
+            var cNameParameter = cName != null ?
+                new ObjectParameter("cName", cName) :
+                new ObjectParameter("cName", typeof(string));
+    
+            var cDateParameter = cDate.HasValue ?
+                new ObjectParameter("cDate", cDate) :
+                new ObjectParameter("cDate", typeof(System.DateTime));
+    
+            var cSexParameter = cSex != null ?
+                new ObjectParameter("cSex", cSex) :
+                new ObjectParameter("cSex", typeof(string));
+    
+            var cValParameter = cVal.HasValue ?
+                new ObjectParameter("cVal", cVal) :
+                new ObjectParameter("cVal", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spUsuariosCRUD", cidParameter, cNameParameter, cDateParameter, cSexParameter, cValParameter, cMensaje);
+        }
     }
 }

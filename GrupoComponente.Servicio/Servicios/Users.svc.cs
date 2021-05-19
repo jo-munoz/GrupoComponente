@@ -4,10 +4,13 @@
     using GrupoComponente.Servicio.Models.ViewModels;
     using System;
     using System.Collections.Generic;
+    using System.Data.Entity.Core.Objects;
     using System.Linq;
 
     public class Users : IUsers
     {
+        public ObjectParameter cMensaje = new ObjectParameter("cMensaje", typeof(String));
+
         public IEnumerable<UsersIndexViewModel> getUsers()
         {
             BL.Users users = new BL.Users();
@@ -33,7 +36,7 @@
             {
                 id = resultado.id,
                 Name = resultado.Name,
-                Date = (DateTime) resultado.Date,
+                Date = resultado.Date.Value.ToString("yyyy-MM-dd"),
                 Sex = resultado.Sex == null ? " " : resultado.Sex
             };
 
@@ -42,16 +45,36 @@
 
         public string CreateUser(UsersCreateBindingModel model)
         {
-            BL.Users user = new BL.Users();
+            try
+            {
+                using (DAL.Models.anubisEntities obDatos = new DAL.Models.anubisEntities())
+                {
+                    var resultado = obDatos.spUsuariosCRUD(-1, model.Name, model.Date, model.Sex, 1, cMensaje);
 
-            return user.CreateUser(model);
+                    return resultado.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.Message.ToString();
+            }
         }
 
         public string EditUser(UsersEditBindingModel model)
         {
-            BL.Users user = new BL.Users();
+            try
+            {
+                using (DAL.Models.anubisEntities obDatos = new DAL.Models.anubisEntities())
+                {
+                    var resultado = obDatos.spUsuariosCRUD(model.id, model.Name, Convert.ToDateTime(model.Date), model.Sex, 2, cMensaje);
 
-            return user.EditUser(model);
+                    return resultado.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.Message.ToString();
+            }
         }
     }
 }

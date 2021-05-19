@@ -1,12 +1,7 @@
-﻿using GrupoComponente.Servicio.Models.DB;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
-namespace GrupoComponente.Controllers
+﻿namespace GrupoComponente.Controllers
 {
+    using System.Web.Mvc;
+
     public class UsuariosController : Controller
     {
         [HttpGet]
@@ -33,10 +28,11 @@ namespace GrupoComponente.Controllers
             ServiceReferenceUsers.UsersClient users = new ServiceReferenceUsers.UsersClient();
             var resultado = users.CreateUser(model);
 
-            if (resultado.Equals("Se realizo proceso con exito"))
+            if (resultado.Equals("-1"))
             {
                 TempData["ColorAlerta"] = "success";
-                TempData["Message"] = resultado;
+                TempData["Message"] = "Se realizo proceso con exito";
+
                 return RedirectToAction("ConsultaUsuario");
             }
             else
@@ -59,6 +55,30 @@ namespace GrupoComponente.Controllers
                 model.Sex = "Masculino";
 
             return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EditarUsuario(Servicio.Models.BindingModels.UsersEditBindingModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            ServiceReferenceUsers.UsersClient users = new ServiceReferenceUsers.UsersClient();
+            var resultado = users.EditUser(model);
+
+            if (resultado.Equals("-1"))
+            {
+                TempData["ColorAlerta"] = "success";
+                TempData["Message"] = "Se realizo proceso con exito";
+
+                return RedirectToAction("ConsultaUsuario");
+            }
+            else
+            {
+                ModelState.AddModelError("", resultado.ToString());
+
+                return View(model);
+            }
         }
 
         public enum Genero

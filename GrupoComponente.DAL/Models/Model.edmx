@@ -12,8 +12,16 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="100" />
           <Property Name="Date" Type="datetime" />
-          <Property Name="Sex" Type="varchar" MaxLength="50" />
+          <Property Name="Sex" Type="varchar" MaxLength="1" />
         </EntityType>
+        <Function Name="spUsuariosCRUD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cid" Type="int" Mode="In" />
+          <Parameter Name="cName" Type="varchar" Mode="In" />
+          <Parameter Name="cDate" Type="datetime" Mode="In" />
+          <Parameter Name="cSex" Type="varchar" Mode="In" />
+          <Parameter Name="cVal" Type="int" Mode="In" />
+          <Parameter Name="cMensaje" Type="varchar" Mode="InOut" />
+        </Function>
         <EntityContainer Name="anubisModelStoreContainer">
           <EntitySet Name="tbUsers" EntityType="Self.tbUsers" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -29,10 +37,18 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Date" Type="DateTime" Precision="3" />
-          <Property Name="Sex" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Sex" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityContainer Name="anubisEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tbUsers" EntityType="Self.tbUsers" />
+          <FunctionImport Name="spUsuariosCRUD">
+            <Parameter Name="cid" Mode="In" Type="Int32" />
+            <Parameter Name="cName" Mode="In" Type="String" />
+            <Parameter Name="cDate" Mode="In" Type="DateTime" />
+            <Parameter Name="cSex" Mode="In" Type="String" />
+            <Parameter Name="cVal" Mode="In" Type="Int32" />
+            <Parameter Name="cMensaje" Mode="InOut" Type="String" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -50,6 +66,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spUsuariosCRUD" FunctionName="anubisModel.Store.spUsuariosCRUD" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -12,7 +12,7 @@
 </h2>
 <hr />
 
-<form action="/EditarUsuario/Usuario" method="post">
+<form action="/Usuarios/EditarUsuario" method="post">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="form-row mb-2">
@@ -20,6 +20,7 @@
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 </div>
             </div>
+            @Html.HiddenFor(model => model.id)
             <div class="form-row mb-2">
                 <div class="col-md-12">
                     @Html.LabelFor(x => x.Name)

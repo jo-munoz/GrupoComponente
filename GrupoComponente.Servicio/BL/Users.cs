@@ -111,7 +111,7 @@
                         var usuario = obDatos.tbUsers.FirstOrDefault(x => x.id == model.id);
 
                         usuario.Name = model.Name.Trim();
-                        usuario.Date = model.Date;
+                        usuario.Date = Convert.ToDateTime(model.Date);
                         usuario.Sex = model.Sex == "Femenino" ? "F" : "M";
                         obDatos.SaveChanges();
 
