@@ -1,16 +1,42 @@
 ﻿namespace GrupoComponente.Controllers
 {
     using System.Web.Mvc;
+    using PagedList;
 
     public class UsuariosController : Controller
     {
         [HttpGet]
-        public ActionResult ConsultaUsuario()
+        public ActionResult ConsultaUsuario(int? pageSize, int? page)
         {
+            //ViewBag.CurrentSort = sortOrder;
+
+            //ViewBag.Name = "Name";
+            //ViewBag.Date = "Date";
+            //ViewBag.Sex = "Sex";
+
+            //pageSize = (pageSize ?? 20);
+            //int pageNumber = (page ?? 1);
+
+            //if (searchString != null)
+            //    page = 1;
+            //else
+            //    searchString = currentFilter;
+
+            //ViewBag.CurrentFilter = searchString;
+
+
+
+
+
+
             ServiceReferenceUsers.UsersClient users = new ServiceReferenceUsers.UsersClient();
             var model = users.getUsers();
 
-            return View(model);
+            pageSize = (pageSize ?? 2);
+            page = (page ?? 1);
+            ViewBag.PageSize = pageSize;
+
+            return View(model.ToPagedList(page.Value, pageSize.Value));
         }
 
         [HttpGet]

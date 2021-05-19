@@ -1,4 +1,7 @@
-﻿@model IEnumerable<GrupoComponente.Servicio.Models.ViewModels.UsersIndexViewModel>
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<GrupoComponente.Servicio.Models.ViewModels.UsersIndexViewModel>
+<link href="~/Content/Views/Usuarios/Usuarios.css" rel="stylesheet" />
+<script src="~/Scripts/Views/Usuarios/ConsultaUsuario.js"></script>
 
 @{
     ViewBag.Title = "Consultar Usuario";
@@ -12,7 +15,53 @@
 </h2>
 <hr />
 
-<table class="table table-bordered table-hover">
+@using (Html.BeginForm("ConsultaUsuario", "Usuarios", FormMethod.Get))
+{
+    @*<input type="text" id="myInput" class="form-control" onkeyup="filtroBusqueda()" placeholder="Filtro de busqueda" />*@
+    <div class="row">
+        @*<div class="col-6">
+            <div class="row d-flex justify-content-start align-items-center">
+                <div class="col-8 col-xl-9">
+                    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", @placeholder = "Escriba aqui", @autocomplete = "off" })
+                </div>
+                <div class="col-4 col-xl-3">
+                    <button type="submit" class="btn btn-dark">
+                        <i class="fas fa-search" style="margin-right:10px"></i> Buscar
+                    </button>
+                </div>
+            </div>
+        </div>*@
+        <div class="col-6">
+            <div class="row d-flex justify-content-start align-items-center">
+                <div class="col-8 col-xl-9">
+                    <input type="text" id="myInput" class="form-control" onkeyup="filtroBusqueda()" placeholder="Filtro por Nombre" />
+                </div>
+                @*<div class="col-4 col-xl-3">
+                    <button type="submit" class="btn btn-dark">
+                        <i class="fas fa-search" style="margin-right:10px"></i> Buscar
+                    </button>
+                </div>*@
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="row d-flex justify-content-end align-items-center">
+                <div class="col-3 text-right">
+                    <select name="pageSize" id="pageSize" class="form-control" style="width: 100%">
+                        <option @if ((int)ViewBag.pageSize == 2) { @Html.Raw("selected") } value="2">2</option>
+                        <option @if ((int)ViewBag.pageSize == 5) { @Html.Raw("selected") } value="5">5</option>
+                        <option @if ((int)ViewBag.pageSize == 10) { @Html.Raw("selected") } value="10">10</option>
+                        <option @if ((int)ViewBag.pageSize == 15) { @Html.Raw("selected") } value="15">15</option>
+                    </select>
+                </div>
+                <div class="col-2 d-flex justify-content-end align-items-center text-right">
+                    <button type="submit" class="btn btn-dark">Aplicar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<table id="myTable" name="myTable" class="table table-bordered table-hover mt-4">
     <thead class="text-center">
         <tr>
             <th class="d-none">Id</th>
@@ -38,6 +87,15 @@
         }
     </tbody>
 </table>
+
+<div class="row">
+    <div class="col-6 d-flex justify-content-start align-items-center">
+        Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+    </div>
+    <div class="col-6 d-flex justify-content-end align-items-center">
+        @Html.PagedListPager(Model, page => Url.Action("ConsultaUsuario", "Usuarios", new { page, pageSize = ViewBag.PageSize }))
+    </div>
+</div>
 
 @section Scripts{
     <script>
