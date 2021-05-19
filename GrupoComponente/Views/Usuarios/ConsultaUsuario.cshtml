@@ -16,31 +16,13 @@
 <hr />
 
 @using (Html.BeginForm("ConsultaUsuario", "Usuarios", FormMethod.Get))
-{
-    @*<input type="text" id="myInput" class="form-control" onkeyup="filtroBusqueda()" placeholder="Filtro de busqueda" />*@
+{    
     <div class="row">
-        @*<div class="col-6">
-            <div class="row d-flex justify-content-start align-items-center">
-                <div class="col-8 col-xl-9">
-                    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", @placeholder = "Escriba aqui", @autocomplete = "off" })
-                </div>
-                <div class="col-4 col-xl-3">
-                    <button type="submit" class="btn btn-dark">
-                        <i class="fas fa-search" style="margin-right:10px"></i> Buscar
-                    </button>
-                </div>
-            </div>
-        </div>*@
         <div class="col-6">
             <div class="row d-flex justify-content-start align-items-center">
                 <div class="col-8 col-xl-9">
                     <input type="text" id="myInput" class="form-control" onkeyup="filtroBusqueda()" placeholder="Filtro por Nombre" />
                 </div>
-                @*<div class="col-4 col-xl-3">
-                    <button type="submit" class="btn btn-dark">
-                        <i class="fas fa-search" style="margin-right:10px"></i> Buscar
-                    </button>
-                </div>*@
             </div>
         </div>
         <div class="col-6">

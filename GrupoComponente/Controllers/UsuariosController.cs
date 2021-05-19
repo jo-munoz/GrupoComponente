@@ -8,27 +8,6 @@
         [HttpGet]
         public ActionResult ConsultaUsuario(int? pageSize, int? page)
         {
-            //ViewBag.CurrentSort = sortOrder;
-
-            //ViewBag.Name = "Name";
-            //ViewBag.Date = "Date";
-            //ViewBag.Sex = "Sex";
-
-            //pageSize = (pageSize ?? 20);
-            //int pageNumber = (page ?? 1);
-
-            //if (searchString != null)
-            //    page = 1;
-            //else
-            //    searchString = currentFilter;
-
-            //ViewBag.CurrentFilter = searchString;
-
-
-
-
-
-
             ServiceReferenceUsers.UsersClient users = new ServiceReferenceUsers.UsersClient();
             var model = users.getUsers();
 
