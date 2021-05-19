@@ -207,6 +207,7 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="Properties\DataSources\GrupoComponente.Servicio.Models.BindingModels.UsersEditBindingModel.datasource" />
+    <None Include="Properties\PublishProfiles\GrupoComponenteWeb - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />
