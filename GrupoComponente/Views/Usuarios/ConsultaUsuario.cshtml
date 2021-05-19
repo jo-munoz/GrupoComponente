@@ -1,0 +1,40 @@
+﻿@model IEnumerable<GrupoComponente.Servicio.Models.ViewModels.UsersIndexViewModel>
+
+@{
+    ViewBag.Title = "Consultar Usuario";
+}
+
+<h2 class="mt-2">
+    <a class="btn btn-primary" title="Nuevo Rol" style="float:right;color:white" href="@Url.Action("Usuario","Usuarios")">
+        <i class="fas fa-plus-circle" style="margin-right:10px"></i>Agregar
+    </a>
+    Listado de Usuarios
+</h2>
+<hr />
+
+<table class="table table-bordered table-hover">
+    <thead class="text-center">
+        <tr>
+            <th>Id</th>
+            <th>Nombres</th>
+            <th>Fecha Nacimiento</th>
+            <th>Sexo</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderBy(x => x.Name))
+        {
+            <tr>
+                <td class="text-center">@Html.DisplayFor(modelItem => item.id)</td>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td class="text-center">@Html.DisplayFor(modelItem => item.Date)</td>
+                <td class="text-center">@Html.DisplayFor(modelItem => item.Sex)</td>
+                <td class="text-center" style="width:130px">                    
+                    <a href="@Url.Action("EditarUsuario","Usuarios", new { id = item.id })" title="Editar registro" class="mx-2"><i class="fas fa-edit" style="font-size:20px"></i></a>
+                    <a href="@Url.Action("Delete","UsersAdmin", new { id = item.id })" title="Eliminar registro"><i class="fas fa-trash" style="font-size:20px;color:red"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
