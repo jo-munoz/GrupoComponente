@@ -86,6 +86,41 @@
             }
         }
 
+        [HttpGet]
+        public ActionResult EliminarUsuario(int? id)
+        {
+            ServiceReferenceUsers.UsersClient users = new ServiceReferenceUsers.UsersClient();
+            var model = users.getUserById(id);
+
+            if (model.Sex.Equals("F"))
+                model.Sex = "Femenino";
+            else
+                model.Sex = "Masculino";
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EliminarUsuario(Servicio.Models.BindingModels.UsersEditBindingModel model)
+        {
+            ServiceReferenceUsers.UsersClient users = new ServiceReferenceUsers.UsersClient();
+            var resultado = users.DeleteUser(model.id);
+
+            if (resultado.Equals("Se realizo proceso con exito"))
+            {
+                TempData["ColorAlerta"] = "success";
+                TempData["Message"] = "Se realizo proceso con exito";
+
+                return RedirectToAction("ConsultaUsuario");
+            }
+            else
+            {
+                ModelState.AddModelError("", resultado.ToString());
+
+                return View(model);
+            }
+        }
+
         public enum Genero
         {
             Femenino,

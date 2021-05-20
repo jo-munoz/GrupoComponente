@@ -38,6 +38,12 @@ namespace GrupoComponente.ServiceReferenceUsers {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsers/EditUser", ReplyAction="http://tempuri.org/IUsers/EditUserResponse")]
         System.Threading.Tasks.Task<string> EditUserAsync(GrupoComponente.Servicio.Models.BindingModels.UsersEditBindingModel model);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsers/DeleteUser", ReplyAction="http://tempuri.org/IUsers/DeleteUserResponse")]
+        string DeleteUser(System.Nullable<int> id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsers/DeleteUser", ReplyAction="http://tempuri.org/IUsers/DeleteUserResponse")]
+        System.Threading.Tasks.Task<string> DeleteUserAsync(System.Nullable<int> id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -97,6 +103,14 @@ namespace GrupoComponente.ServiceReferenceUsers {
         
         public System.Threading.Tasks.Task<string> EditUserAsync(GrupoComponente.Servicio.Models.BindingModels.UsersEditBindingModel model) {
             return base.Channel.EditUserAsync(model);
+        }
+        
+        public string DeleteUser(System.Nullable<int> id) {
+            return base.Channel.DeleteUser(id);
+        }
+        
+        public System.Threading.Tasks.Task<string> DeleteUserAsync(System.Nullable<int> id) {
+            return base.Channel.DeleteUserAsync(id);
         }
     }
 }

@@ -121,5 +121,37 @@
             }
             catch (Exception ex) { throw ex; }
         }
+
+        /// <summary>
+        /// ELIMINA UN USUARIO
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public string DeleteUser(int? id)
+        {
+            try
+            {
+                using (DAL.Models.anubisEntities obDatos = new DAL.Models.anubisEntities())
+                {
+                    List<Models.DB.tbUsers> user = new List<Models.DB.tbUsers>();
+                    user = GetUsers(id);
+
+                    if (user.Count == 0)
+                    {
+                        return "No existe ningun registro con ese número de código";
+                    }
+                    else
+                    {
+                        var usuario = obDatos.tbUsers.FirstOrDefault(x => x.id == id);
+
+                        obDatos.tbUsers.Remove(usuario);
+                        obDatos.SaveChanges();
+
+                        return "Se realizo proceso con exito";
+                    }
+                }
+            }
+            catch (Exception ex) { throw ex; }
+        }
     }
 }

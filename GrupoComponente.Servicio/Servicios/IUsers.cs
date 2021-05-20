@@ -19,5 +19,8 @@
 
         [OperationContract]
         string EditUser(UsersEditBindingModel model);
+
+        [OperationContract]
+        string DeleteUser(int? id);
     }
 }

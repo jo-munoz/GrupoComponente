@@ -76,5 +76,12 @@
                 return ex.Message.ToString();
             }
         }
+
+        public string DeleteUser(int? id)
+        {
+            BL.Users users = new BL.Users();
+
+            return users.DeleteUser(id);
+        }
     }
 }

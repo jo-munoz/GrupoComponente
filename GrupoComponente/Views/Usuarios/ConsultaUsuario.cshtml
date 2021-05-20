@@ -63,7 +63,7 @@
                 <td class="text-center">@Html.DisplayFor(modelItem => item.Sex)</td>
                 <td class="text-center" style="width:130px">
                     <a href="@Url.Action("EditarUsuario","Usuarios", new { id = item.id })" title="Editar registro" class="mx-2"><i class="fas fa-edit" style="font-size:20px"></i></a>
-                    <a href="@Url.Action("Delete","UsersAdmin", new { id = item.id })" title="Eliminar registro"><i class="fas fa-trash" style="font-size:20px;color:red"></i></a>
+                    <a href="@Url.Action("EliminarUsuario","Usuarios", new { id = item.id })" title="Eliminar registro"><i class="fas fa-trash" style="font-size:20px;color:red"></i></a>
                 </td>
             </tr>
         }
